@@ -1,0 +1,8 @@
+@font-face {
+	font-family: beyond_the_mountains;
+	src: url("beyond_the_mountains.otf");
+}
+
+h1,h2,h3 {
+	font-family: beyond_the_mountains;
+}
