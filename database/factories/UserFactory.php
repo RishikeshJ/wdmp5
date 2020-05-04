@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\CustomerQuery;
 use App\Order;
 use App\OrderItem;
 use App\Product;
@@ -104,5 +105,17 @@ $factory->define(OrderItem::class, function (Faker $faker) {
     return [
         'quantity' => $faker->randomDigit,
         'instructions' => $faker->word(),
+    ];
+});
+
+
+$factory->define(CustomerQuery::class, function (Faker $faker) {
+    return [
+        'text' => $faker->sentences(2, true),
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'phone' => ''.$faker->randomDigit,
+        'address' => $faker->streetAddress,
+        'type' => ''.$faker->randomDigit,
     ];
 });

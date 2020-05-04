@@ -1,5 +1,6 @@
 <?php
 
+use App\CustomerQuery;
 use App\User;
 use App\Product;
 use App\Order;
@@ -24,6 +25,9 @@ class DatabaseSeeder extends Seeder
     {   
         // $this->call(UserSeeder::class);
         factory(User::class, 10)->create();
+        factory(CustomerQuery::class, 10)->create(['type'=>'0']);
+        factory(CustomerQuery::class, 10)->create(['type'=>'1']);
+        factory(CustomerQuery::class, 10)->create(['type'=>'2']);
         // factory(Order::class, 50);
         
         factory(ProductCategory::class, 5)->create()->each(function($category){

@@ -11,6 +11,8 @@
             @isset($message)
                 <span>{{$message}}</span>
             @endisset
+            <div style="padding-top:10px"></div>
+            <a name="" id="" class="btn btn-primary" href="/admin/orders/create" role="button">Create New Order</a>
             <table class="table table-striped table-inverse table-responsive">
                 <thead class="thead-inverse">
                     <tr>

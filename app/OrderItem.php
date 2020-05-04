@@ -11,4 +11,8 @@ class OrderItem extends Model
     public function get_product(){
         return $this->belongsTo('App\Product', 'product');
     }
+
+    public function get_order(){
+        return $this->belongsTo('App\Order', 'order');
+    }
 }

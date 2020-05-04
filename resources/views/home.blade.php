@@ -39,7 +39,7 @@
         <div class="mx-auto">
             <div class="row">
                 <img class="mx-auto" src="images/Burguer.png" alt="" style="height: 30px;">
-            </div>""
+            </div>
             <br><br>
             <h2> Las más vendidos </h2>
 

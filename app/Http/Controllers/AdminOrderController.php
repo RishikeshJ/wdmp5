@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Order;
-
+use App\User;
 class AdminOrderController extends Controller
 {
     /**
@@ -31,7 +31,20 @@ class AdminOrderController extends Controller
      */
     public function create()
     {
-        return  redirect()->action('AdminOrderController@index');
+        $userList = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            $userList[$user->id] = $user->email;
+        }
+        
+        $order = new Order();
+        return view('admin_edit_orders',[
+            'order' => $order,
+            'users_list' => $userList,
+            'action' => ['AdminOrderController@store'],
+            'order_user' => NULL,
+            'products' => Product::all(),
+        ]);
     }
 
     /**
@@ -42,7 +55,36 @@ class AdminOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'price' => 'required',
+            'final_price' => 'required',
+            'discount' => 'required',
+            'address' => 'required',
+        ]);
+
+        $order = new Order();
+
+        $order->price = $request->input("price");
+        $order->final_price = $request->input("final_price");
+        $order->discount = $request->input("discount");
+        if($request->has("pickup")){
+            $order->pickup = true;
+        } else {
+            $order->pickup = false;
+        }
+        if($request->has("delivery")){
+            $order->delivery = true;
+        } else {
+            $order->delivery = false;
+        }
+
+        $order->user = $request->input("user");
+        $order->address = $request->input("address");
+        $order->fulfilled = $request->input("fulfilled");
+        
+        $order->save();
+
+        return  redirect()->action('AdminOrderController@edit', ['id' => $order->id]);
     }
 
     /**
@@ -66,8 +108,24 @@ class AdminOrderController extends Controller
      */
     public function edit(Order $order)
     {
+        $userList = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            $userList[$user->id] = $user->email;
+        }
+
+        $productList = [];
+        $list = Product::all();
+        foreach ($list as $item) {
+            $productList[$item->id] = $item->name.' - $'.$item->price;
+        }
+
         return view('admin_edit_orders', [
             'order' => $order,
+            'users_list' => $userList,
+            'action' => ['AdminOrderController@update', $order->id],
+            'order_user' => $order->get_user->id,
+            'product_list' => $productList,
         ]);
     }
 
@@ -81,8 +139,8 @@ class AdminOrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $validatedData = $request->validate([
-            'price' => 'required',
-            'final_price' => 'required',
+            'user' => 'required',
+            // 'final_price' => 'required',
             'discount' => 'required',
             'address' => 'required',
         ]);
@@ -101,6 +159,7 @@ class AdminOrderController extends Controller
             $order->delivery = false;
         }
         $order->address = $request->input("address");
+        $order->user = $request->input("user");
         $order->fulfilled = $request->input("fulfilled");
         
         $order->save();

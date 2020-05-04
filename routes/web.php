@@ -29,4 +29,7 @@ Route::get('/home', function () {
 Route::resource('admin/users', 'AdminUserController')->except([]);
 Route::resource('admin/products', 'AdminProductController')->except([]);
 Route::resource('admin/orders', 'AdminOrderController')->except([]);
+Route::resource('admin/orders/item', 'AdminOrderItemController')->except([]);
 Route::redirect('/admin', '/admin/users');
+
+Route::resource('feedback', 'CustomerQueryController')->except([]);

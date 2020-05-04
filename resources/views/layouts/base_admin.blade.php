@@ -29,8 +29,8 @@
                 <li class="nav-item"> <a class="nav-link" href="/admin/users">Users</a> </li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/orders">Orders</a> </li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/products">Products</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">Blogs</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">Web Content</a> </li>
+                {{-- <li class="nav-item"> <a class="nav-link" href="#">Blogs</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Web Content</a> </li> --}}
                 
                 <li class="nav-item">
                   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
