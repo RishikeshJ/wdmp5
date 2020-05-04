@@ -38,5 +38,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public 
+    public function orders(){
+        return $this->hasMany("App\Order", "user");
+    }
+
+    public function last_ordered_on(){
+        $all_orders = $this->orders;
+        if($all_orders->count() > 0){
+            return $this->orders()->orderBy("datetime")->get()->last()->datetime;
+        }
+
+        return "";
+    }
 }

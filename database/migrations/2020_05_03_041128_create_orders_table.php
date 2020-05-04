@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             // $table->foreignId("user")->nullable();
             // $table->foreignId("offer")->nullable();
             $table->double("price", 8, 2)->default(0.0);
+            $table->double("final_price", 8, 2)->default(0.0);
             $table->double("discount")->default(0.0);
             $table->double("tax")->default(0.0);
             $table->dateTime("datetime", 0)->useCurrent();

@@ -26,13 +26,7 @@ Route::get('/home', function () {
     ]);
 });
 
-Route::get('/admin/users', function () {
-    $products = Product::all();
-    $users = User::all();
-    return view('admin_voew_users', [
-        'products' => $products,
-        'users' => $users,
-    ]);
-});
-
+Route::resource('admin/users', 'AdminUserController')->except([]);
+Route::resource('admin/products', 'AdminProductController')->except([]);
+Route::resource('admin/orders', 'AdminOrderController')->except([]);
 Route::redirect('/admin', '/admin/users');
