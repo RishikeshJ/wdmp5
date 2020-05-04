@@ -45,20 +45,29 @@
 
         </div>
     </div>
-    <div class="row">
-        @foreach ($products as $item)
-            <div class="col">
-                <div class="mx-auto" style="background: transparent">
-                    <img class="card-img-top" src="images/5.png" alt="">
-                    <div class="text-center">
-                        <p class="">{{ $item->name }}</p>
-                        <p class=""> {{ $item->price_label }}{{ $item->price }} </p>
-                        <span class="">{{$item->description }}</span>
+    @foreach ($product_category as $item_cat)
+    <hr>
+        <div class="row justify-content-center">
+            <h4 class="text-center">{{ $item_cat->name }}</h4>
+            <div class="row justify-content-center">
+                @foreach ($item_cat->get_products as $item)
+                    @if($loop->iteration > 3)
+                        @break
+                    @endif
+                    <div class="col-2">
+                        <div class="mx-auto" style="background: transparent">
+                            <img class="card-img-top" src="images/5.png" alt="">
+                            <div class="text-center">
+                                <p class="">{{ $item->name }}</p>
+                                <p class=""> {{ $item->price_label }}{{ $item->price }} </p>
+                                <span class="">{{$item->description }}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
+        </div>
+    @endforeach
     <div class="row">
         <div style="padding: 30px; margin: 10px">
             <button style="padding: 5px">VER MENU HOY</button>
