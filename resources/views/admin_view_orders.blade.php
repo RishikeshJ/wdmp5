@@ -1,7 +1,7 @@
 @extends('layouts.base_admin')
 
 @section('title')
-    <title>Admin | Users</title>
+    <title>Admin | View Orders</title>
 @endsection
 
 @section('main')
@@ -16,8 +16,8 @@
                     <tr>
                         <th>OrderID</th>
                         <th>User</th>
-                        <th>Phone</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Products</th>
                         <th>Price</th>
                         <th>Discount</th>
@@ -51,20 +51,20 @@
                             </td>
                             <td>
                                 @foreach ($order->order_items as $order_item)
-                                    {{$order_item->get_product->price}} <br>
+                                {{$order_item->get_product->price_label}}{{$order_item->get_product->price}} <br>
                                 @endforeach
                             </td>
                             <td>
-                                {{$order->discount}}
+                                {{$order_item->get_product->price_label}}{{$order->discount}}
                             </td>
                             <td>
-                                {{$order->tax}}
+                                {{$order_item->get_product->price_label}}{{$order->tax}}
                             </td>
                             <td>
-                                {{$order->final_price}}
+                                {{$order_item->get_product->price_label}}{{$order->final_price}}
                             </td>
                             <td>
-                                {{$order->get_active_final_price()}}
+                                {{$order_item->get_product->price_label}}{{$order->get_active_final_price()}}
                             </td>
                             <td>
                                 {{$order->address}}
@@ -85,13 +85,13 @@
                             </td>
                         
                         <td>
-                            <form action="/admin/users/{{$order->id}}" method="post">
+                            <form action="/admin/orders/{{$order->id}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-block btn-danger">Delete</button>
                             </form>
 
-                            <a href="/admin/users/{{ $order->id }}/edit" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modify</a>
+                            <a href="/admin/orders/{{ $order->id }}/edit" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modify</a>
                             {{-- <button type="button" class="btn btn-sm btn-block btn-primary">Modify</button> --}}
                         </td>
                     </tr>

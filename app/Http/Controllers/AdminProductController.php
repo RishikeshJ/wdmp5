@@ -61,7 +61,7 @@ class AdminProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin_edit_orders', [
+        return view('admin_edit_products', [
             'product' => $product,
         ]);
     }
@@ -76,22 +76,21 @@ class AdminProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validatedData = $request->validate([
+            'name' => 'required',
+            'image_url' => 'required',
+            'description' => 'required',
+            'long_description' => 'required',
             'price' => 'required',
-            'final_price' => 'required',
-            'discount' => 'required',
-            'tax' => 'required',
-            'address' => 'required',
+            'price_label' => 'required',
         ]);
 
+        $product->name = $request->input("name");
+        $product->image_url = $request->input("image_url");
+        $product->description = $request->input("description");
+        $product->long_description = $request->input("long_description");
         $product->price = $request->input("price");
-        $product->final_price = $request->input("final_price");
-        $product->discount = $request->input("discount");
-        $product->tax = $request->input("tax");
-        $product->pickup = $request->input("pickup");
-        $product->delivery = $request->input("delivery");
-        $product->address = $request->input("address");
-        $product->fulfilled = $request->input("fulfilled");
-        
+        $product->price_label = $request->input("price_label");
+
         $product->save();
 
         return  redirect()->action('AdminProductController@index');

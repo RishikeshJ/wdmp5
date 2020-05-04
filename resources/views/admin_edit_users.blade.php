@@ -1,5 +1,11 @@
 @extends('layouts.base_admin')
 
+
+@section('title')
+    <title>Admin | Edit Users</title>
+@endsection
+
+
 @section('main')
 
 <div class="container">

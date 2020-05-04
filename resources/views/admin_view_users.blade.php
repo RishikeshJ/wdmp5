@@ -5,9 +5,8 @@
 @endsection
 
 @section('main')
-<div class="container">
+<div class="container-fluid" style="zoom:0.7">
     <div class="row">
-        
         <div class="col justify-content-center">
             @isset($message)
                 <span>{{$message}}</span>
@@ -36,7 +35,8 @@
                         <td>{{ $user->phone }}</td>
                         <td class="flex-nowrap">
                             @foreach ($user->orders as $order)
-                                000{{ $order->id }} <br>
+                            ORDER00{{ $order->id }} - {{$order->final_price}}
+                            <br>
                             @endforeach
                         </td>
                         <td>{{ $user->joined }}</td>

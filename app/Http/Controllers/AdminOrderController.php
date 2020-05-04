@@ -84,16 +84,22 @@ class AdminOrderController extends Controller
             'price' => 'required',
             'final_price' => 'required',
             'discount' => 'required',
-            'tax' => 'required',
             'address' => 'required',
         ]);
 
         $order->price = $request->input("price");
         $order->final_price = $request->input("final_price");
         $order->discount = $request->input("discount");
-        $order->tax = $request->input("tax");
-        $order->pickup = $request->input("pickup");
-        $order->delivery = $request->input("delivery");
+        if($request->has("pickup")){
+            $order->pickup = true;
+        } else {
+            $order->pickup = false;
+        }
+        if($request->has("delivery")){
+            $order->delivery = true;
+        } else {
+            $order->delivery = false;
+        }
         $order->address = $request->input("address");
         $order->fulfilled = $request->input("fulfilled");
         
